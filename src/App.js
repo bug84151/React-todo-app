@@ -5,45 +5,45 @@ import AddTodo from "./components/AddTodo";
 
 function App() {
   const [todos, setTodos] = useState([]);
-  useEffect(() => {
-    const getTodos = async () => {
-      const todosFromServer = await fetchTodos();
-      setTodos(todosFromServer);
-    };
-    getTodos();
-  }, []);
+  // useEffect(() => {
+  //   const getTodos = async () => {
+  //     const todosFromServer = await fetchTodos();
+  //     setTodos(todosFromServer);
+  //   };
+  //   getTodos();
+  // }, []);
 
   // fetch todos
-  const fetchTodos = async () => {
-    const res = await fetch("http://localhost:5000/todos");
-    const data = await res.json();
-    return data;
-  };
+  // const fetchTodos = async () => {
+  //   const res = await fetch("http://localhost:5000/todos");
+  //   const data = await res.json();
+  //   return data;
+  // };
 
   // Add new todo
 
   const addTodo = async (todo) => {
-    const res = await fetch("http://localhost:5000/todos", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(todo),
-    });
+    // const res = await fetch("http://localhost:5000/todos", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(todo),
+    // });
 
-    const data = await res.json();
-    setTodos([...todos, data]);
-    // const id = Math.floor(Math.random() * 1000) + 1;
-    // const updatedTodo = { id, ...todo };
-    // setTodos([...todos, updatedTodo]);
+    // const data = await res.json();
+    // setTodos([...todos, data]);
+    const id = Math.floor(Math.random() * 1000) + 1;
+    const updatedTodo = { id, ...todo };
+    setTodos([...todos, updatedTodo]);
   };
 
   // delete todo
 
-  const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/todos/${id}`, {
-      method: "DELETE",
-    });
+  const deleteTask = (id) => {
+    // await fetch(`http://localhost:5000/todos/${id}`, {
+    //   method: "DELETE",
+    // });
 
     setTodos(todos.filter((todo) => todo.id !== id));
   };
