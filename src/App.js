@@ -4,48 +4,37 @@ import Todos from "./components/Todos";
 import AddTodo from "./components/AddTodo";
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  // useEffect(() => {
-  //   const getTodos = async () => {
-  //     const todosFromServer = await fetchTodos();
-  //     setTodos(todosFromServer);
-  //   };
-  //   getTodos();
-  // }, []);
+  // storage
 
-  // fetch todos
-  // const fetchTodos = async () => {
-  //   const res = await fetch("http://localhost:5000/todos");
-  //   const data = await res.json();
-  //   return data;
-  // };
+  let [todos, setTodos] = useState([]);
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem("storedTodos"));
+    setTodos(storedTodos);
+  }, []);
 
   // Add new todo
-
-  const addTodo = async (todo) => {
-    // const res = await fetch("http://localhost:5000/todos", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(todo),
-    // });
-
-    // const data = await res.json();
-    // setTodos([...todos, data]);
+  const addTodo = (todo) => {
     const id = Math.floor(Math.random() * 1000) + 1;
     const updatedTodo = { id, ...todo };
     setTodos([...todos, updatedTodo]);
+    // localStorage.setItem("storedTodos", JSON.stringify(todos));
+    const recievedTodo = JSON.parse(localStorage.getItem("storedTodos"));
+
+    recievedTodo.push(updatedTodo);
+
+    localStorage.setItem("storedTodos", JSON.stringify(recievedTodo));
+    console.log(todos);
+    console.log(JSON.parse(localStorage.getItem("storedTodos")));
   };
 
   // delete todo
 
   const deleteTask = (id) => {
-    // await fetch(`http://localhost:5000/todos/${id}`, {
-    //   method: "DELETE",
-    // });
+    const recievedTodo = JSON.parse(localStorage.getItem("storedTodos"));
 
-    setTodos(todos.filter((todo) => todo.id !== id));
+    const newTodos = recievedTodo.filter((todo) => todo.id !== id);
+    setTodos(newTodos);
+    localStorage.setItem("storedTodos", JSON.stringify(newTodos));
   };
 
   return (
