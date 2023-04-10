@@ -5,7 +5,9 @@ import AddTodo from "./components/AddTodo";
 
 function App() {
   // storage
-
+  if (localStorage.getItem("storedTodos") == null) {
+    localStorage.setItem("storedTodos", JSON.stringify([]));
+  }
   let [todos, setTodos] = useState([]);
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("storedTodos"));
