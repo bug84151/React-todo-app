@@ -16,7 +16,6 @@ const Todo = ({ todo, onDelete }) => {
           // console.log(todo);
           const completedTodoId = todo.id;
           const storedTodos = JSON.parse(localStorage.getItem("storedTodos"));
-          console.log(storedTodos);
           storedTodos.forEach((todo) => {
             if (todo.id === completedTodoId) {
               todo.checked = todoChecked;

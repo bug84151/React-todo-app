@@ -13,7 +13,6 @@ function App() {
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("storedTodos"));
     setTodos(storedTodos);
-    console.log(storedTodos);
   }, []);
 
   // Add new todo
