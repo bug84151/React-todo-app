@@ -8,7 +8,7 @@ const AddTodo = ({ onAdd }) => {
       alert("Enter a todo 🖋");
       return;
     }
-    onAdd({ title });
+    onAdd({ title, checked: "" });
     setTitle("");
   };
   return (

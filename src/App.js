@@ -5,16 +5,15 @@ import AddTodo from "./components/AddTodo";
 
 function App() {
   // storage
+  // localStorage.removeItem("storedTodos");
   if (localStorage.getItem("storedTodos") == null) {
     localStorage.setItem("storedTodos", JSON.stringify([]));
   }
   let [todos, setTodos] = useState([]);
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("storedTodos"));
-    if(!storedTodos){
-      localStorage.setItem("storedTodos",JSON.stringify([]))
-    }
     setTodos(storedTodos);
+    console.log(storedTodos);
   }, []);
 
   // Add new todo
@@ -28,8 +27,6 @@ function App() {
     recievedTodo.push(updatedTodo);
 
     localStorage.setItem("storedTodos", JSON.stringify(recievedTodo));
-    console.log(todos);
-    console.log(JSON.parse(localStorage.getItem("storedTodos")));
   };
 
   // delete todo
